@@ -14,22 +14,35 @@
             and <a href="http://www.bensound.com/" rel="nofollow">Royalty Free Music from Bensound</a>.
         </div>
         <script type="text/javascript">
-            var music = new Audio('bossa.mp3');
-            var ding  = new Audio('bell.mp3');
-            var go    = document.getElementById('go');
+            var music   = new Audio('bossa.mp3');
+            var ding    = new Audio('bell.mp3');
+            var go      = document.getElementById('go');
+
             go.addEventListener('click', function() {
                 this.classList.toggle('active');
                 if (this.classList.contains('active')) {
+                    startPlaying();
+                } else {
+                    stopPlaying();
+                }
+            });
+
+            function startPlaying() {
+                if (music.paused) {
                     ding.pause();
                     music.loop = true;
                     music.currentTime = 0;
                     music.play();
-                } else {
+                }
+            }
+
+            function stopPlaying() {
+                if (!music.paused) {
                     music.pause();
                     ding.currentTime = 0;
                     ding.play();
                 }
-            });
+            }
         </script>
     </body>
 </html>
