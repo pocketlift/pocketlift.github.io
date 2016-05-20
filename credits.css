@@ -1,0 +1,17 @@
+a {
+    color: rgb(100, 100, 255);
+    text-decoration: none;
+}
+
+.credits {
+    font-size: 12px;
+    text-align: center;
+    background-clip: text;
+    color: rgb(128, 128, 128);
+    text-shadow: rgba(255, 255, 255, 0.5) 1px 1px 0px;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    padding: 0 50px;
+}
