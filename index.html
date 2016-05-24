@@ -5,7 +5,7 @@
 		<title>Pocket lift</title>
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="Pocket Lift. Probably the best elevator music generator there is.">
+		<meta name="description" content="Elevator music for awkward moments. Probably the best lift music generator there is.">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="canonical" href="https://pocketlift.me/">
 		<link rel="manifest" href="manifest.json">
@@ -23,7 +23,7 @@
 		<meta property="og:url" content="https://pocketlift.me/">
 		<meta property="og:description" content="The best elevator music generator there is.">
 
-		<link rel="stylesheet" href="pocket-lift.css" charset="utf-8">
+		<link rel="stylesheet" href="styles.css" charset="utf-8">
 	</head>
 	<body>
 		<button type="button" id="play" class="metal radial">♬</button>
@@ -33,5 +33,16 @@
 			and a royalty free music from <a href="http://www.bensound.com/" rel="nofollow">Bensound</a>.
 		</div>
 		<script src="main.js"></script>
+		<script>
+			if('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/worker.js', { scope: '/' }).then(function(registration) { 
+					console.log('Service Worker Registered'); 
+				});
+
+				navigator.serviceWorker.ready.then(function(registration) { 
+					console.log('Service Worker Ready');
+				});
+			}
+		</script>
 	</body>
 </html>
