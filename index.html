@@ -26,49 +26,12 @@
 		<link rel="stylesheet" href="pocket-lift.css" charset="utf-8">
 	</head>
 	<body>
-		<button type="button" id="go" name="go" class="metal radial">♬</button>
+		<button type="button" id="play" class="metal radial">♬</button>
 		<div id="credits">
 			Original idea from <a href="https://github.com/rmedaer/">Raphael</a> and <a href="https://github.com/matthieusieben">Matthieu</a>
 			using <a href="http://simurai.com/">Simon's button design</a>
 			and a royalty free music from <a href="http://www.bensound.com/" rel="nofollow">Bensound</a>.
 		</div>
-		<script type="text/javascript">
-			var music   = new Audio('bossa.mp3');
-			var bell    = new Audio('bell.mp3');
-			var go      = document.getElementById('go');
-
-			go.addEventListener('click', togglePlaying);
-
-			function togglePlaying() {
-				if (music.paused) {
-					startPlaying();
-				} else {
-					stopPlaying();
-				}
-			}
-
-			function startPlaying() {
-				if (music.paused) {
-					go.classList.add('active');
-
-					bell.currentTime = 0;
-					bell.pause();
-
-					music.loop = true;
-					music.currentTime = 0;
-					music.play();
-				}
-			}
-
-			function stopPlaying() {
-				if (!music.paused) {
-					go.classList.remove('active');
-
-					bell.play();
-
-					music.pause();
-				}
-			}
-		</script>
+		<script src="main.js"></script>
 	</body>
 </html>
