@@ -2,8 +2,7 @@
   "version": "1.0.0",
   "name": "Pocket Lift",
   "launch_path": "/index.html",
-  "description": "Elevator music generator",
-  "display": "standalone",
+  "description": "Elevator music generator for awkward moments.",
   "icons": {
     "128": "icon-128x128.png"
   },
@@ -20,10 +19,10 @@
   "locales": {
     "en": {
       "name": "Pocket Lift",
-      "description": "Pocket Lift"
+      "description": "Elevator music generator for awkward moments."
     },
     "fr": {
-      "name": "Ascenseur de poche",
+      "name": "Pocket Lift",
       "description": "Générateur de musique d'ascenseur."
     }
   }
