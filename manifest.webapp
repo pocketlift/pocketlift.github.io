@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "name": "Pocket Lift",
+  "launch_path": "/index.html",
+  "description": "Elevator music generator",
+  "display": "standalone",
+  "icons": {
+    "128": "icon-128x128.png"
+  },
+  "developer": {
+    "name": "ESCAUX Product Development",
+    "url": "https://github.com/escaux"
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "Pocket Lift",
+      "description": "Pocket Lift"
+    },
+    "fr": {
+      "name": "Ascenseur de poche",
+      "description": "Générateur de musique d'ascenseur."
+    }
+  }
+}

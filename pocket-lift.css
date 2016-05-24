@@ -1,0 +1,120 @@
+* {
+	position: relative;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	background-color: hsla(0,0%,90%,1);
+	background-image: linear-gradient(-45deg, hsla(0,0%,0%,0), hsla(0,0%,0%,.05) );
+	background-size: 5px;
+
+	font-size: 16px;
+	line-height: 1em;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+a {
+	color: rgb(100, 100, 255);
+	text-decoration: none;
+}
+
+#credits {
+	text-align: center;
+	background-clip: text;
+	color: rgb(128, 128, 128);
+	text-shadow: rgba(255, 255, 255, 0.5) 1px 1px 0px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 35px;
+}
+
+.metal {
+	position: relative;
+	margin: 60px auto 0;
+	outline: none;
+
+	width: 1.6em;
+	height: 1.6em;
+	line-height: 1.6em;
+	border-radius: 0.8em;
+
+	font-weight: bold;
+	font-size: 6em;
+	text-align: center;
+
+	border: none;
+	display: block;
+
+	color: hsla(0,0%,20%,1);
+	background-color: (0,0%,90%);
+
+	text-shadow:
+		hsla(0,0%,40%,.5) 0 -1px 0,
+		hsla(0,0%,100%,.6) 0 2px 1px;
+
+	box-shadow:
+		inset hsla(0,0%,15%,  1) 0  0px 0px 4px,
+		inset hsla(0,0%,15%, .8) 0 -1px 5px 4px,
+		inset hsla(0,0%,0%, .25) 0 -1px 0px 7px,
+		inset hsla(0,0%,100%,.7) 0  2px 1px 7px,
+
+		hsla(0,0%, 0%,.15) 0 -5px 6px 4px,
+		hsla(0,0%,100%,.5) 0  5px 6px 4px;
+
+	background-image:
+		-webkit-radial-gradient(  50%   0%,  8% 50%, hsla(0,0%,100%,.5) 0%, hsla(0,0%,100%,0) 100%),
+		-webkit-radial-gradient(  50% 100%, 12% 50%, hsla(0,0%,100%,.6) 0%, hsla(0,0%,100%,0) 100%),
+		-webkit-radial-gradient(   0%  50%, 50%  7%, hsla(0,0%,100%,.5) 0%, hsla(0,0%,100%,0) 100%),
+		-webkit-radial-gradient( 100%  50%, 50%  5%, hsla(0,0%,100%,.5) 0%, hsla(0,0%,100%,0) 100%),
+
+		-webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   3%, hsla(0,0%,  0%,.1) 3.5%),
+		-webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0)   6%, hsla(0,0%,100%,.1) 7.5%),
+		-webkit-repeating-radial-gradient( 50% 50%, 100% 100%, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 1.2%, hsla(0,0%,100%,.2) 2.2%),
+
+		-webkit-radial-gradient( 50% 50%, 200% 50%, hsla(0,0%,90%,1) 5%, hsla(0,0%,85%,1) 30%, hsla(0,0%,60%,1) 100%);
+}
+
+.metal:active, .metal.active {
+	color: hsl(210, 100%, 40%);
+
+	text-shadow:
+		hsla(210,100%,20%,.3) 0 -1px 0,
+		hsl(210,100%,85%) 0 2px 1px,
+		hsla(200,100%,80%,1) 0 0 5px,
+		hsla(210,100%,50%,.6) 0 0 20px;
+
+	box-shadow:
+		inset hsla(210,100%,30%,  1) 0  0px 0px 4px,
+		inset hsla(210,100%,15%, .4) 0 -1px 5px 4px,
+		inset hsla(210,100%,20%,.25) 0 -1px 0px 7px,
+		inset hsla(210,100%,100%,.7) 0  2px 1px 7px,
+
+		hsla(210,100%,75%, .8) 0  0px 3px 2px,
+		hsla(210,50%,40%, .25) 0 -5px 6px 4px,
+		hsla(210,80%,95%,   1) 0  5px 6px 4px;
+}
+
+.metal:before, .metal:after {
+	content: "";
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: inherit;
+	height: inherit;
+	border-radius: inherit;
+
+	background-image:
+		-webkit-radial-gradient(  50%   0%, 10% 50%, hsla(0,0%,0%,.1) 0%, hsla(0,0%,0%,0) 100%),
+		-webkit-radial-gradient(  50% 100%, 10% 50%, hsla(0,0%,0%,.1) 0%, hsla(0,0%,0%,0) 100%),
+		-webkit-radial-gradient(   0%  50%, 50% 10%, hsla(0,0%,0%,.1) 0%, hsla(0,0%,0%,0) 100%),
+		-webkit-radial-gradient( 100%  50%, 50% 06%, hsla(0,0%,0%,.1) 0%, hsla(0,0%,0%,0) 100%);
+}
+.metal:before { transform: rotate( 65deg); }
+.metal:after { transform: rotate(-65deg); }
