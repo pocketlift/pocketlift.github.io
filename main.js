@@ -16,80 +16,98 @@
  *  limitations under the License
  *
  */
-(function () {
+(function (audioCtx, documentElement) {
 	// Inspired from https://github.com/GoogleChrome/airhorn
 
 	'use strict';
 
-	var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-	var playButton = document.getElementById('play');
-	var musicBuffer = loadAudio('bossa.mp3');
-	var bellBuffer = loadAudio('bell.mp3');
-	var startTimeStamp;
-	var source;
-	var sourceId = 0;
+	var bossa = new ButtonController('bossa', 'bossa.mp3', 'bell.mp3');
+	var monkey = new ButtonController('monkey', 'monkey.mp3', null);
 
-	playButton.addEventListener('mousedown', handleDown);
-	playButton.addEventListener('touchstart', handleDown);
+	function ButtonController(elementId, playFile, stopfile) {
+		var source;
+		var sourceId = 0;
+		var playButton = document.getElementById(elementId);
+		var playBuffer = playFile && loadAudio(playFile);
+		var stopBuffer = stopfile && loadAudio(stopfile);
+		var startTimeStamp;
 
-	document.documentElement.addEventListener('mouseup', handleUp);
-	document.documentElement.addEventListener('touchend', handleUp);
-
-	function handleDown(event) {
-		event.preventDefault();
-		if(event.touches && event.touches.length > 1) {
-			return false;
-		}
-		if (startTimeStamp) {
-			stopPlaying();
-		} else {
-			startPlaying();
-		}
-	}
-
-	function handleUp(event) {
-		event.preventDefault();
-		if (250 < (Date.now() - startTimeStamp)) {
-			stopPlaying();
-		}
-	}
-
-	function startPlaying() {
-		if (!startTimeStamp) {
-			startTimeStamp = Date.now();
-			playButton.classList.add('active');
-			startBuffer(musicBuffer, true);
-		}
-	}
-
-	function stopPlaying() {
-		if (startTimeStamp) {
-			startTimeStamp = null;
-			playButton.classList.remove('active');
-			stopCurrentSource();
-			startBuffer(bellBuffer);
-		}
-	}
-
-	function stopCurrentSource() {
-		if (source) {
-			source.stop();
-			source = null;
-		}
-	}
-
-	function startBuffer(bufferPromise, loop) {
-		var requestId = ++sourceId;
-		return bufferPromise.then(createAudioSource).then(function (audioSource) {
-			if (requestId === sourceId) {
-				audioSource.start(0);
-				audioSource.loop = Boolean(loop);
-				source = audioSource;
-				return source;
-			} else {
-				throw new Error('Another sound was started before this one could load.');
-			}
+		playButton.disabled = true;
+		Promise.all([ playBuffer, stopBuffer ]).then(function () {
+			playButton.disabled = false;
 		});
+
+		playButton.addEventListener('mousedown', handleDown);
+		playButton.addEventListener('touchstart', handleDown);
+
+		this.play = startPlaying;
+		this.stop = stopPlaying;
+
+		return;
+
+		function handleDown(event) {
+			event.preventDefault();
+			if(event.touches && event.touches.length > 1) {
+				return false;
+			}
+			if (startTimeStamp) {
+				stopPlaying();
+			} else {
+				startPlaying();
+			}
+		}
+
+		function handleUp(event) {
+			event.preventDefault();
+			if (250 < (Date.now() - startTimeStamp)) {
+				stopPlaying();
+			}
+		}
+
+		function startPlaying() {
+			if (!startTimeStamp) {
+				startTimeStamp = Date.now();
+				playButton.classList.add('active');
+				startBuffer(playBuffer, true);
+
+				documentElement.addEventListener('mouseup', handleUp);
+				documentElement.addEventListener('touchend', handleUp);
+			}
+		}
+
+		function stopPlaying() {
+			if (startTimeStamp) {
+				startTimeStamp = null;
+				playButton.classList.remove('active');
+				stopCurrentSource();
+				startBuffer(stopBuffer);
+
+				documentElement.removeEventListener('mouseup', handleUp);
+				documentElement.removeEventListener('touchend', handleUp);
+			}
+		}
+
+		function stopCurrentSource() {
+			if (source) {
+				source.stop();
+				source = null;
+			}
+		}
+
+		function startBuffer(bufferPromise, loop) {
+			if (!bufferPromise) {
+				return;
+			}
+
+			var requestId = ++sourceId;
+			bufferPromise.then(createAudioSource).then(function (audioSource) {
+				if (requestId === sourceId) {
+					audioSource.start(0);
+					audioSource.loop = Boolean(loop);
+					source = audioSource;
+				}
+			});
+		}
 	}
 
 	function createAudioSource(buffer) {
@@ -117,4 +135,5 @@
 			xhr.send();
 		});
 	}
-})();
+
+})(new (window.AudioContext || window.webkitAudioContext)(), document.documentElement);

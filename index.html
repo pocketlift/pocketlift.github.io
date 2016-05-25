@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Pocket lift</title>
+<head>
+	<meta charset="utf-8">
+	<title>Pocket lift</title>
 
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="Elevator music for awkward moments. Probably the best lift music generator there is.">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="canonical" href="https://pocketlift.me/">
-		<link rel="manifest" href="manifest.json">
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="application-name" content="Pocket Lift">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta name="apple-mobile-web-app-title" content="Pocket Lift">
-		<link rel="icon" sizes="128x128" href="icon-128x128.png">
-		<meta name="theme-color" content="#e0e0e0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Elevator music for awkward moments. Probably the best lift music generator there is.">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="canonical" href="https://pocketlift.me/">
+	<link rel="manifest" href="manifest.json">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="application-name" content="Pocket Lift">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Pocket Lift">
+	<link rel="icon" sizes="128x128" href="icon-128x128.png">
+	<meta name="theme-color" content="#e0e0e0">
 
-		<meta property="og:title" content="Air Horn">
-		<meta property="og:type" content="website">
-		<meta property="og:image" content="https://pocketlift.me/icon-128x128.png">
-		<meta property="og:url" content="https://pocketlift.me/">
-		<meta property="og:description" content="The best elevator music generator there is.">
+	<meta property="og:title" content="Air Horn">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="https://pocketlift.me/icon-128x128.png">
+	<meta property="og:url" content="https://pocketlift.me/">
+	<meta property="og:description" content="The best elevator music generator there is.">
 
-		<link rel="stylesheet" href="styles.css" charset="utf-8">
-	</head>
-	<body>
-		<button type="button" id="play" class="metal radial">♬</button>
-		<div id="credits">
-			Original idea from <a href="https://github.com/rmedaer/">Raphael</a> and <a href="https://github.com/matthieusieben">Matthieu</a>
-			using <a href="http://simurai.com/">Simon's button design</a>
-			and a royalty free music from <a href="http://www.bensound.com/" rel="nofollow">Bensound</a>.
-		</div>
-		<script src="main.js"></script>
-		<script>
-			if('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('/worker.js', { scope: '/' }).then(function(registration) { 
-					console.log('Service Worker Registered'); 
-				});
+	<link rel="stylesheet" href="styles.css" charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<button class="toggle" id="bossa">&#9836;</button>
+		<button class="toggle hidden" id="monkey">&#x1f435;</button>
 
-				navigator.serviceWorker.ready.then(function(registration) { 
-					console.log('Service Worker Ready');
-				});
-			}
-		</script>
-	</body>
+		<p id="credits">
+			Original idea from
+			<a href="https://github.com/rmedaer/" target="_blank">Raphael</a>
+			and
+			<a href="#monkey">M</a><a href="https://github.com/matthieusieben/" target="_blank">atthieu</a>
+			using
+			<a href="http://simurai.com/" rel="nofollow" target="_blank">Simon</a>
+			's button design and a royalty free music from
+			<a href="http://www.bensound.com/" rel="nofollow" target="_blank">Bensound</a>.
+		</p>
+	</div>
+	<script src="main.js"></script>
+	<script>
+		if('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/worker.js', { scope: '/' }).then(function(registration) { 
+				console.log('Service Worker Registered'); 
+			});
+
+			navigator.serviceWorker.ready.then(function(registration) { 
+				console.log('Service Worker Ready');
+			});
+		}
+	</script>
+</body>
 </html>
