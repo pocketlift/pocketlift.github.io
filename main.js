@@ -17,7 +17,6 @@
  *
  */
 (function (audioCtx, documentElement) {
-	// Inspired from https://github.com/GoogleChrome/airhorn
 
 	'use strict';
 
@@ -122,9 +121,13 @@
 			var xhr = new XMLHttpRequest();
 
 			xhr.onload = function() {
-				audioCtx.decodeAudioData(xhr.response, function(decodedBuffer) {
-					resolve(decodedBuffer);
-				});
+				if (xhr.status == 200) {
+					audioCtx.decodeAudioData(xhr.response, function(decodedBuffer) {
+						resolve(decodedBuffer);
+					});
+				} else {
+					reject(xhr.statusText);
+				}
 			};
 			xhr.onerror = function(e) {
 				reject(e.error);
@@ -136,4 +139,7 @@
 		});
 	}
 
-})(new (window.AudioContext || window.webkitAudioContext)(), document.documentElement);
+})(
+	new (window.AudioContext || window.webkitAudioContext)(),
+	document.documentElement
+);
