@@ -17,7 +17,7 @@
  *
  */
 
-const APP_CACHE = 'app-v2';
+const APP_CACHE = 'app-v3';
 const MEDIA_CACHE = 'media-v1';
 
 const CACHES = {
