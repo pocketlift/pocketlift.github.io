@@ -17,14 +17,18 @@
  *
  */
 
-const appCaches = {
-	'app-v1': [
+const APP_CACHE = 'app-v2';
+const MEDIA_CACHE = 'media-v1';
+
+const CACHES = {
+	[ APP_CACHE ]: [
 		'/',
 		'/index.html',
 		'/main.js',
 		'/styles.css',
+		'/symbola.ttf',
 	],
-	'media-v1': [
+	[ MEDIA_CACHE ]: [
 		'/bell.mp3',
 		'/bossa.mp3',
 		'/monkey.mp3',
@@ -33,14 +37,14 @@ const appCaches = {
 
 const initCache = (cacheName) => {
 	return self.caches.open(cacheName).then((cache) => {
-		return cache.addAll(appCaches[cacheName]);
+		return cache.addAll(CACHES[cacheName]);
 	});
 };
 
 const saveToCache = (request, response) => {
 	const uri = request.url.slice(request.referrer.length - 1);
-	for (let cacheName in appCaches) {
-		if (appCaches[cacheName].indexOf(uri) !== -1) {
+	for (let cacheName in CACHES) {
+		if (CACHES[cacheName].indexOf(uri) !== -1) {
 			self.caches.open(cacheName).then((cache) => {
 				cache.put(request, response);
 			});
@@ -50,15 +54,15 @@ const saveToCache = (request, response) => {
 };
 
 self.addEventListener('install', (event) => {
-	event.waitUntil(initCache('app-v1'));
+	event.waitUntil(initCache(APP_CACHE));
 	// No need to wait until the media files are loaded
-	initCache('media-v1');
+	initCache(MEDIA_CACHE);
 });
 
 self.addEventListener('activate',  (event) => {
 	event.waitUntil(self.caches.keys().then((keyList) => {
 		return Promise.all(keyList.map((key) => {
-			if (!appCaches.hasOwnProperty(key)) {
+			if (!CACHES.hasOwnProperty(key)) {
 				return self.caches.delete(key);
 			}
 		}).concat(self.clients.claim()));
